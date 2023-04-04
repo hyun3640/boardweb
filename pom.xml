@@ -36,13 +36,28 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- DBCP -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
-		
+
 		<!-- weaving : 조인포인트(어드바이스가 적용될 위치)에 실행할 코드인 어드바이스를 끼워넣는 과정 -->
 		<!-- The AspectJ weaver applies aspects to Java classes. It can be used 
 			as a Java agent in order to apply load-time weaving (LTW) during class-loading 
