@@ -7,11 +7,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.impl.BoardDAO;
 
-//@Controller
+@Controller
 public class BoardController {
 
 	//글 등록
-	@RequestMapping("/inserBoard.do")
+	@RequestMapping("/insertBoard.do")
 	public String insertBoard(BoardVO vo, BoardDAO boardDAO) {
 		boardDAO.insertBoard(vo);
 		return "getBoardList.do";
