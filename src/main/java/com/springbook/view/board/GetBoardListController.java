@@ -4,25 +4,27 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
 
 import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.impl.BoardDAO;
 
-public class GetBoardListController implements Controller {
+@Controller
+public class GetBoardListController {
 
-	@Override
-	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
+//	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("/getBoardList.do")
+	public ModelAndView getBoardList(BoardVO vo, BoardDAO boardDAO, ModelAndView mav) {
 		System.out.println("글 목록 검색 처리");
 
 		// 1. 사용자 입력 정보 추출(나중에)
 		// 2. DB 연동 처리
-		BoardVO vo = new BoardVO();
-		BoardDAO boardDAO = new BoardDAO();
-		List<BoardVO> boardList = boardDAO.getBoardList(vo);
+//		BoardVO vo = new BoardVO();
+//		BoardDAO boardDAO = new BoardDAO();
+//		List<BoardVO> boardList = boardDAO.getBoardList(vo);
 
 		// 3. 검색 결과를 세션에 저장하고 목록 화면을 리턴한다. 그런데 세션이라는 것은 클라이언트 브라우저당 하나씩
 		// 메모리에 생성되어 클라이언트의 상태 정보를 유지하기 위해 생성 한다. 따라서 세션에 많은 정보가 저장되면 될수록
@@ -38,9 +40,9 @@ public class GetBoardListController implements Controller {
 		// 따라서 JSP파일에서는 검색결과를 세션이 아닌 HttpServletRequest로ㅂ터 꺼내 쓸 수 있다.
 
 		// 3. 검색 결과와 호면 정보를 ModelAndView에 저장하여 리턴한다.
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("boardList", boardList); // Model 정보 저장
-		mav.setViewName("getBoardList"); // View 정보 저장
+//		ModelAndView mav = new ModelAndView();
+		mav.addObject("boardList", boardDAO.getBoardList(vo)); // Model 정보 저장
+		mav.setViewName("getBoardList.jsp"); // View 정보 저장
 		return mav;
 	}
 

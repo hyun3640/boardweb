@@ -1,25 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- ViewResolver 등록 -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- <bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/board/"></property>
 		<property name="suffix" value=".jsp"></property>
-	</bean>
-	
+	</bean> -->
+
+	<!-- Scans the classpath for annotated components that will be auto-registered 
+		as Spring beans. By default, the Spring-provided @Component, @Repository, 
+		@Service, @Controller, @RestController, @ControllerAdvice, and @Configuration 
+		stereotypes will be detected. -->
+	<context:component-scan
+		base-package="com.springbook.view"></context:component-scan>
 
 
 
-	
 
 
 	<!-- HandlerMapping 등록 -->
-	<!-- 
-	SimpleUrlHandlerMapping 객체는 Setter 인젝션을 통해 Properties 대신 HashMap 객체를 이용한 것만 제외하면 같은 기능을 제공한다.
-	 -->
-	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	<!-- SimpleUrlHandlerMapping 객체는 Setter 인젝션을 통해 Properties 대신 HashMap 객체를 
+		이용한 것만 제외하면 같은 기능을 제공한다. -->
+	<!-- <bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
 				<prop key="/login.do">login</prop>
@@ -31,14 +59,20 @@
 				<prop key="/logout.do">logout</prop>
 			</props>
 		</property>
-	</bean>
+	</bean>  -->
 
 	<!-- Controller 등록 -->
-	<bean id="login" class="com.springbook.view.user.LoginController"></bean>
-	<bean id="getBoardList" class="com.springbook.view.board.GetBoardListController"></bean>
-	<bean id="getBoard" class="com.springbook.view.board.GetBoardController"></bean>
-	<bean id="insertBoard" class="com.springbook.view.board.InsertBoardController"></bean>
-	<bean id="updateBoard" class="com.springbook.view.board.UpdateBoardController"></bean>
-	<bean id="deleteBoard" class="com.springbook.view.board.DeleteBoardController"></bean>
-	<bean id="logout" class="com.springbook.view.user.LogoutController"></bean>
+	<!-- <bean id="login" class="com.springbook.view.user.LoginController"></bean>
+	<bean id="getBoardList"
+		class="com.springbook.view.board.GetBoardListController"></bean>
+	<bean id="getBoard"
+		class="com.springbook.view.board.GetBoardController"></bean>
+	<bean id="insertBoard"
+		class="com.springbook.view.board.InsertBoardController"></bean>
+	<bean id="updateBoard"
+		class="com.springbook.view.board.UpdateBoardController"></bean>
+	<bean id="deleteBoard"
+		class="com.springbook.view.board.DeleteBoardController"></bean>
+	<bean id="logout"
+		class="com.springbook.view.user.LogoutController"></bean> -->
 </beans>
