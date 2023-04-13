@@ -1,25 +1,17 @@
 package com.springbook.view.user;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
- //어떤 Controller 객체가 검색되더라도 같은 코드로 실행하려면 모든 Controller의 최상위 인터페이스가 필요하다.
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.springbook.biz.board.BoardVO;
-import com.springbook.biz.board.impl.BoardDAO;
 import com.springbook.biz.user.UserVO;
 import com.springbook.biz.user.impl.UserDAO;
 
 @Controller
-public class LoginController  {
-
-	//public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
-	@RequestMapping("/login.do")
-	public String login(UserVO vo, UserDAO userDAO) {
-		System.out.println("로그인 처리");
+public class LoginController {
 
 //		// 1. 사용자 입력 정보 추출
 //		String id = request.getParameter("id");
@@ -41,8 +33,25 @@ public class LoginController  {
 //			mav.setViewName("redirect:login.jsp");
 //		}
 //		return mav;
-		if(userDAO.getUser(vo)!=null) return "getBoardList.do";
-		else return "login.jsp";
+
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	public String loginView(@ModelAttribute("user") UserVO vo) {
+		System.out.println("로그인 화면으로 이동...");
+		vo.setId("test");
+		vo.setPassword("test123");
+		return "login.jsp";
+	}
+
+	
+	// public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public String login(UserVO vo, UserDAO userDAO, HttpSession session) {
+		UserVO user = userDAO.getUser(vo);
+		if (user != null) {
+			session.setAttribute("userName", user.getName());
+			return "getBoardList.do";
+		} else
+			return "login.jsp";
 	}
 
 }
