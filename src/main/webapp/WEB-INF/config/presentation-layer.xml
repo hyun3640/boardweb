@@ -44,6 +44,8 @@
 	 	<property name="maxUploadSize" value="100000"></property>
 	 </bean>
 
+	<!-- 예외 처리 설정 p439 -->
+	
 
 
 	<!-- HandlerMapping 등록 -->
